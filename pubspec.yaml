@@ -55,6 +55,7 @@ flutter:
      - assets/search.png
      - assets/splashscreen.png
      - assets/user.png
+     - assets/background.png
      - assets/user2.png
 
 

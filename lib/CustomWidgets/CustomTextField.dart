@@ -2,63 +2,56 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String labelText;
-  final String hintText;
+
   final bool obscure;
   final TextCapitalization capitalization;
   final String prefixImage;
+  final String hintText;
 
   CustomTextField(
-      {this.controller,
-      this.labelText,
-      this.obscure,
-      this.capitalization,
-      this.prefixImage,
-      this.hintText});
+    this.controller,
+    this.hintText,
+    this.obscure,
+    this.capitalization,
+    this.prefixImage,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-        color: Color(0X33333333),
-      ),
-      child: TextField(
-        controller: controller,
-        textCapitalization: capitalization,
-        style: Theme.of(context).textTheme.bodyText1,
-        decoration: InputDecoration(
-          fillColor: Color(0X33333333),
-          labelText: labelText,
-          labelStyle: Theme.of(context)
-              .textTheme
-              .headline4
-              .apply(backgroundColor: Color(0X33333333)),
-          hintStyle: Theme.of(context).textTheme.bodyText1,
-          hintText: hintText,
-          prefixIcon: Image.asset(
-            prefixImage,
-            height: 24.0,
-            width: 24.0,
-            color: Color(0XFFB2B2B2),
-          ),
+        margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(36.0),
+          color: Color(0X99333333),
         ),
-      ),
-    );
+        child: TextField(
+            cursorColor: Theme.of(context).cursorColor,
+            controller: controller,
+            textAlign: TextAlign.justify,
+            textCapitalization: capitalization,
+            style: Theme.of(context).textTheme.bodyText1,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(fontSize: 14.0, color: Colors.white70, fontFamily: "Lato"),
+              hintText: hintText,
+              prefixIcon: Image.asset(
+                prefixImage,
+                height: 20.0,
+                width: 20.0,
+                color: Color(0XFFB2B2B2),
+              ),
+            )));
   }
 }
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
-  final bool obscure;
   final String prefixImage;
 
-  PasswordTextField({
+  PasswordTextField(
     this.controller,
-    this.obscure,
     this.prefixImage,
-  });
+  );
 
   @override
   _PasswordTextFieldState createState() => _PasswordTextFieldState();
@@ -69,7 +62,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 
   @override
   void initState() {
-    obscurity = false;
+    obscurity = true;
   }
 
   @override
@@ -77,20 +70,18 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return Container(
         margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          color: Color(0X33333333),
+          borderRadius: BorderRadius.circular(36.0),
+          color: Color(0X99333333),
         ),
         child: TextField(
+          cursorColor: Theme.of(context).cursorColor,
           controller: widget.controller,
+          textAlign: TextAlign.justify,
           style: Theme.of(context).textTheme.bodyText1,
+          obscureText: obscurity,
           decoration: InputDecoration(
-            fillColor: Color(0X33333333),
-            labelText: 'Password',
-            labelStyle: Theme.of(context)
-                .textTheme
-                .headline4
-                .apply(backgroundColor: Color(0X33333333)),
-            hintStyle: Theme.of(context).textTheme.bodyText1,
+            border: InputBorder.none,
+            hintStyle: TextStyle(fontSize: 14.0, color: Colors.white70, fontFamily: "Lato"),
             hintText: "Enter your password",
             prefixIcon: Image.asset(
               widget.prefixImage,
@@ -101,7 +92,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             suffixIcon: IconButton(
                 icon: Icon(
                   // Based on obscurity state choose the icon
-                  obscurity ? Icons.visibility : Icons.visibility_off,
+                  obscurity ? Icons.visibility_off : Icons.visibility,
                   color: Color(0XFFB2B2B2),
                 ),
                 onPressed: () {
